@@ -21,16 +21,26 @@ args = my_parser.parse_args()
 
 input_path = args.Path
 
-print(input_path)
+def read_input(inp_path,header_exists = True ):
+    '''
+    Read csv file and output 2-D list of output.
+    Assumes 1st element in list is always header.
+    
+    header_exists is set to True indicating first row is a header
+    '''
+    housing = []
 
-housing = []
 
-with open(input_path, newline='') as csvfile:
-    csvreader = csv.reader(csvfile, delimiter=' ')
-    for number,row in enumerate(csvreader):
-        if number == 0:
-            continue
-        else:
-            housing.append(row)
+    with open(input_path, newline='') as csvfile:
+        csvreader = csv.reader(csvfile, delimiter=' ')
+        for number,row in enumerate(csvreader):
+            if header_exists and number == 0:
+                continue
+            else:
+                housing.append(row)
+    
+    return housing
+
+housing_csv = read_input(input_path)
         
     
